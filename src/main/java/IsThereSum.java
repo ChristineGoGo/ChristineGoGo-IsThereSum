@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class IsThereSum {
     /**
@@ -9,7 +10,25 @@ public class IsThereSum {
      * @param target a hypothetical sum of two numbers.
      * @return true if two separate values in the array add up to a target, false otherwise.
      */
+    public boolean searchArray(int[] nums, int val) {
+        for (int num: nums) {
+            if (num == val) {
+                return true;
+            }
+        }
+        return false;
+    }
     public boolean check(int[] arr, int target){
+        // return false;
+        int difference;
+        for (int i = 0; i < arr.length - 1; i++) {
+            int num = arr[i];
+            difference = target > num ? target - num : num - target;
+            int[] slice = Arrays.copyOfRange(arr, (i + 1), (arr.length - 1));
+            if (searchArray(slice, difference) == true) {
+                return true;
+            }
+        }
         return false;
     }
 }
